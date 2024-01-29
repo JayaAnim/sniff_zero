@@ -12,22 +12,16 @@ int sniff_pkts_noloop(pcap_t* handle) {
     int dl = pcap_datalink(handle);
     const char* dl_name = pcap_datalink_val_to_name(dl);
 
-
-
     //Capture packets
     while (pcap_next_ex(handle, &pkt_hdr, &pkt_data)) {
 
         fprintf(stdout, "packet[%hd]===============================================================\n", pkt_cntr);
-        //Initialize packet type for capturing
-        packet_t* packet = (packet_t*)malloc(sizeof(packet_t)); 
-    	packet->free = NULL;
-    	packet->disp = NULL;
 
-        if (parse_pcap_hdr(pkt_hdr, packet)) {
+        if (parse_pcap_hdr(pkt_hdr)) {
             fprintf(stdout, "[ERROR] could not parse pcap header\n");
         }
         else {
-            disp_pcap_hdr(packet, dl_name);
+            disp_pcap_hdr(dl_name);
         }
 
         parse_pkt_func func = get_pkt_parser(dl, dl_name);
@@ -35,18 +29,17 @@ int sniff_pkts_noloop(pcap_t* handle) {
             fprintf(stdout, "[ERROR] linktype %s not supported\n", dl_name);
         }
         else {
-            if (func(pkt_data, pkt_hdr->caplen, packet)) {
+            if (func(pkt_data, pkt_hdr->caplen)) {
                 fprintf(stdout, "[ERROR] could not properly parse packet\n");
             }
-            else if (packet->disp != NULL) {
-                packet->disp(packet);
+            else if (disp_pkt != NULL) {
+                disp_pkt();
             }
         }
 
-        if (packet->free != NULL) {
-                packet->free(packet);
+        if (free_pkt != NULL) {
+                free_pkt();
         }
-        free(packet);
         
 
         pkt_cntr++;
@@ -74,12 +67,12 @@ void disp_dls(pcap_t* pcap_inst) {
     pcap_free_datalinks(dls);
 }
 
-void disp_pcap_hdr(packet_t* parsed_packet, const char* dl_name) {
-    fprintf(stdout, "(datalink %s) (captured %u/%u) (time %ld.%06d)\n", dl_name, parsed_packet->pcap_hdr.caplen, parsed_packet->pcap_hdr.len, parsed_packet->pcap_hdr.ts.tv_sec, parsed_packet->pcap_hdr.ts.tv_usec);
+void disp_pcap_hdr(const char* dl_name) {
+    fprintf(stdout, "(datalink %s) (captured %u/%u) (time %ld.%06d)\n", dl_name, packet.pcap_hdr.caplen, packet.pcap_hdr.len, packet.pcap_hdr.ts.tv_sec, packet.pcap_hdr.ts.tv_usec);
 }
 
-int parse_pcap_hdr(struct pcap_pkthdr* hdr, packet_t* parsed_packet) {
-    parsed_packet->pcap_hdr = *hdr;
+int parse_pcap_hdr(struct pcap_pkthdr* hdr) {
+    packet.pcap_hdr = *hdr;
     return 0;
 }
 

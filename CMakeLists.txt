@@ -19,6 +19,7 @@ set(SRC_FILES
     ${SRC_DIR}/ieee802_11.c
     ${SRC_DIR}/ipvx.c
     ${SRC_DIR}/ethernet.c
+    ${SRC_DIR}/packet_globals.c
 )
 
 set(INC_FILES

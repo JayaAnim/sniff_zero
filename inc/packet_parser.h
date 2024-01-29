@@ -15,9 +15,9 @@ int sniff_pkts_noloop(pcap_t* handle);
 
 void disp_dls(pcap_t* pcap_inst);
 
-void disp_pcap_hdr(packet_t* parsed_packet, const char* dl_name);
+void disp_pcap_hdr(const char* dl_name);
 
-int parse_pcap_hdr(struct pcap_pkthdr* hdr, packet_t* parsed_packet);
+int parse_pcap_hdr(struct pcap_pkthdr* hdr);
 
 parse_pkt_func get_pkt_parser(int dl_id, const char* dl_name);
 

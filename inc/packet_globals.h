@@ -9,23 +9,25 @@
 struct packet;
 
 //For displaying packet information
-typedef void (*disp_pkt_func)(struct packet*);
+typedef void (*disp_pkt_func)();
 
 //For displaying packet information
-typedef void (*free_pkt_func)(struct packet*);
+typedef void (*free_pkt_func)();
 
 typedef struct packet {
     struct pcap_pkthdr pcap_hdr;
     void* spcl_hdr;
     void* norm_hdr;
     void* pkt_data;
-    disp_pkt_func disp;
-    free_pkt_func free;
 } packet_t;
 
+extern packet_t packet;
+extern disp_pkt_func disp_pkt;
+extern disp_pkt_func free_pkt;
+
 //Return 0 for no error, 1 for error
-typedef int (*parse_pkt_func)(const u_char*, bpf_u_int32, packet_t*);
+typedef int (*parse_pkt_func)(const u_char*, bpf_u_int32);
 
-
+void init_globals();
 
 #endif

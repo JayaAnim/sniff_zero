@@ -9,6 +9,8 @@
 
 int main(int argc, char** argv) {
 
+    init_globals();
+
     char* if_name = retr_if();
     
     pcap_t* handle = init_handle(if_name);

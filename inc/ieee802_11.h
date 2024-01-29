@@ -24,16 +24,16 @@ typedef struct ieee80211_radiotap_packet {
 } radiotap_pkt_t;
 
 /*LINKTYPE_IEEE802_11_RADIOTAP 	127 	DLT_IEEE802_11_RADIO 	Radiotap link-layer information followed by an 802.11 header */
-int parse_IEEE802_11_RADIOTAP(const u_char* data, bpf_u_int32 caplen, packet_t* parsed_packet);
+int parse_IEEE802_11_RADIOTAP(const u_char* data, bpf_u_int32 caplen);
 
-int parse_IEEE802_11_RADIOTAP_hdr(const u_char* data, bpf_u_int32 caplen, packet_t* parsed_packet);
+int parse_IEEE802_11_RADIOTAP_hdr(const u_char* data, bpf_u_int32 caplen);
 
-int parse_IEEE802_11_hdr(const u_char* data, bpf_u_int32 caplen, packet_t* parsed_packet);
+int parse_IEEE802_11_hdr(const u_char* data, bpf_u_int32 caplen);
 
-int parse_IEEE802_11_pkt(const u_char* data, bpf_u_int32 caplen, packet_t* parsed_packet);
+int parse_IEEE802_11_pkt(const u_char* data, bpf_u_int32 caplen);
 
-void disp_IEEE802_11_RADIOTAP(packet_t* parsed_packet);
+void disp_IEEE802_11_RADIOTAP();
 
-void free_IEEE802_11_RADIOTAP(packet_t* parsed_packet);
+void free_IEEE802_11_RADIOTAP();
 
 #endif
