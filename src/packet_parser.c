@@ -1,18 +1,5 @@
 #include "packet_parser.h"
 #include "packet_globals.h"
-//Delete here
-#include <sys/resource.h>
-
-//Delete here
-void printMemoryUsage() 
-{
-    struct rusage usage;
-    if (0 == getrusage(RUSAGE_SELF, &usage)) {
-        printf("Memory Usage: %ld bytes\n", usage.ru_maxrss);
-    } else {
-        printf("Error getting memory usage.\n");
-    }
-}
 
 int sniff_pkts_noloop(pcap_t* handle) {
     u_int32_t pkt_cntr = 0;
@@ -31,11 +18,10 @@ int sniff_pkts_noloop(pcap_t* handle) {
     while (pcap_next_ex(handle, &pkt_hdr, &pkt_data)) {
 
         fprintf(stdout, "packet[%hd]===============================================================\n", pkt_cntr);
-	printMemoryUsage();
         //Initialize packet type for capturing
         packet_t* packet = (packet_t*)malloc(sizeof(packet_t)); 
-	packet->free = NULL;
-	packet->disp = NULL;
+    	packet->free = NULL;
+    	packet->disp = NULL;
 
         if (parse_pcap_hdr(pkt_hdr, packet)) {
             fprintf(stdout, "[ERROR] could not parse pcap header\n");
@@ -57,13 +43,11 @@ int sniff_pkts_noloop(pcap_t* handle) {
             }
         }
 
-	if (packet->free != NULL) {
-       	    packet->free(packet);
-	}
+        if (packet->free != NULL) {
+                packet->free(packet);
+        }
         free(packet);
         
-        //Delete here
-        printMemoryUsage();
 
         pkt_cntr++;
         if (pkt_cntr % 10 == 0) {
