@@ -1,0 +1,44 @@
+[
+{
+  "directory": "/Users/chaselamkin/Desktop/github/sniffer/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/chaselamkin/Desktop/github/sniffer/inc  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk -mmacosx-version-min=14.1 -o CMakeFiles/sniffer.dir/src/main.c.o -c /Users/chaselamkin/Desktop/github/sniffer/src/main.c",
+  "file": "/Users/chaselamkin/Desktop/github/sniffer/src/main.c",
+  "output": "CMakeFiles/sniffer.dir/src/main.c.o"
+},
+{
+  "directory": "/Users/chaselamkin/Desktop/github/sniffer/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/chaselamkin/Desktop/github/sniffer/inc  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk -mmacosx-version-min=14.1 -o CMakeFiles/sniffer.dir/src/packet_parser.c.o -c /Users/chaselamkin/Desktop/github/sniffer/src/packet_parser.c",
+  "file": "/Users/chaselamkin/Desktop/github/sniffer/src/packet_parser.c",
+  "output": "CMakeFiles/sniffer.dir/src/packet_parser.c.o"
+},
+{
+  "directory": "/Users/chaselamkin/Desktop/github/sniffer/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/chaselamkin/Desktop/github/sniffer/inc  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk -mmacosx-version-min=14.1 -o CMakeFiles/sniffer.dir/src/interface_opts.c.o -c /Users/chaselamkin/Desktop/github/sniffer/src/interface_opts.c",
+  "file": "/Users/chaselamkin/Desktop/github/sniffer/src/interface_opts.c",
+  "output": "CMakeFiles/sniffer.dir/src/interface_opts.c.o"
+},
+{
+  "directory": "/Users/chaselamkin/Desktop/github/sniffer/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/chaselamkin/Desktop/github/sniffer/inc  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk -mmacosx-version-min=14.1 -o CMakeFiles/sniffer.dir/src/sniffer_config.c.o -c /Users/chaselamkin/Desktop/github/sniffer/src/sniffer_config.c",
+  "file": "/Users/chaselamkin/Desktop/github/sniffer/src/sniffer_config.c",
+  "output": "CMakeFiles/sniffer.dir/src/sniffer_config.c.o"
+},
+{
+  "directory": "/Users/chaselamkin/Desktop/github/sniffer/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/chaselamkin/Desktop/github/sniffer/inc  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk -mmacosx-version-min=14.1 -o CMakeFiles/sniffer.dir/src/ieee802_11.c.o -c /Users/chaselamkin/Desktop/github/sniffer/src/ieee802_11.c",
+  "file": "/Users/chaselamkin/Desktop/github/sniffer/src/ieee802_11.c",
+  "output": "CMakeFiles/sniffer.dir/src/ieee802_11.c.o"
+},
+{
+  "directory": "/Users/chaselamkin/Desktop/github/sniffer/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/chaselamkin/Desktop/github/sniffer/inc  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk -mmacosx-version-min=14.1 -o CMakeFiles/sniffer.dir/src/ipvx.c.o -c /Users/chaselamkin/Desktop/github/sniffer/src/ipvx.c",
+  "file": "/Users/chaselamkin/Desktop/github/sniffer/src/ipvx.c",
+  "output": "CMakeFiles/sniffer.dir/src/ipvx.c.o"
+},
+{
+  "directory": "/Users/chaselamkin/Desktop/github/sniffer/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/cc  -I/Users/chaselamkin/Desktop/github/sniffer/inc  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk -mmacosx-version-min=14.1 -o CMakeFiles/sniffer.dir/src/ethernet.c.o -c /Users/chaselamkin/Desktop/github/sniffer/src/ethernet.c",
+  "file": "/Users/chaselamkin/Desktop/github/sniffer/src/ethernet.c",
+  "output": "CMakeFiles/sniffer.dir/src/ethernet.c.o"
+}
+]

@@ -1,0 +1,38 @@
+#include <stdio.h>
+
+int main() {
+    char answer;
+    printf("Do you want to continue capturing more packets? (y/n): ");
+    scanf(" %c", &answer);
+}
+/*
+#include <pcap/pcap.h>
+#include <arpa/inet.h>
+#include "packet_parser.h"
+#include "interface_opts.h"
+#include "sniffer_config.h"
+#include "packet_globals.h"
+
+#include <unistd.h>
+
+int main(int argc, char** argv) {
+
+    char* if_name = retr_if();
+    
+    pcap_t* handle = init_handle(if_name);
+
+    u_int8_t config_code = config_handle(handle);
+
+    int status_code = activate_handle(handle);
+
+    int code = sniff_pkts_noloop(handle);
+
+    free(if_name);
+    //End program
+    pcap_close(handle);
+
+    
+    return 0;
+
+}
+*/
