@@ -1,18 +1,10 @@
 #include <stdio.h>
-
-int main() {
-    char answer;
-    printf("Do you want to continue capturing more packets? (y/n): ");
-    scanf(" %c", &answer);
-}
-/*
 #include <pcap/pcap.h>
 #include <arpa/inet.h>
 #include "packet_parser.h"
 #include "interface_opts.h"
 #include "sniffer_config.h"
 #include "packet_globals.h"
-
 #include <unistd.h>
 
 int main(int argc, char** argv) {
@@ -35,4 +27,3 @@ int main(int argc, char** argv) {
     return 0;
 
 }
-*/

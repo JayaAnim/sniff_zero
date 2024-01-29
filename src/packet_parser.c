@@ -1,5 +1,18 @@
 #include "packet_parser.h"
 #include "packet_globals.h"
+//Delete here
+#include <sys/resource.h>
+
+//Delete here
+void printMemoryUsage() 
+{
+    struct rusage usage;
+    if (0 == getrusage(RUSAGE_SELF, &usage)) {
+        printf("Memory Usage: %ld bytes\n", usage.ru_maxrss);
+    } else {
+        printf("Error getting memory usage.\n");
+    }
+}
 
 int sniff_pkts_noloop(pcap_t* handle) {
     u_int32_t pkt_cntr = 0;
@@ -39,9 +52,12 @@ int sniff_pkts_noloop(pcap_t* handle) {
                 packet->disp(packet);
             }
         }
-        pkt_cntr++;
+
         packet->free(packet);
         free(packet);
+        
+        //Delete here
+        printMemoryUsage();
 
         pkt_cntr++;
         if (pkt_cntr % 10 == 0) {
