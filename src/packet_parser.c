@@ -31,8 +31,11 @@ int sniff_pkts_noloop(pcap_t* handle) {
     while (pcap_next_ex(handle, &pkt_hdr, &pkt_data)) {
 
         fprintf(stdout, "packet[%hd]===============================================================\n", pkt_cntr);
+	printMemoryUsage();
         //Initialize packet type for capturing
         packet_t* packet = (packet_t*)malloc(sizeof(packet_t)); 
+	packet->free = NULL;
+	packet->disp = NULL;
 
         if (parse_pcap_hdr(pkt_hdr, packet)) {
             fprintf(stdout, "[ERROR] could not parse pcap header\n");
@@ -40,6 +43,7 @@ int sniff_pkts_noloop(pcap_t* handle) {
         else {
             disp_pcap_hdr(packet, dl_name);
         }
+
         parse_pkt_func func = get_pkt_parser(dl, dl_name);
         if (func == NULL) {
             fprintf(stdout, "[ERROR] linktype %s not supported\n", dl_name);
@@ -48,12 +52,14 @@ int sniff_pkts_noloop(pcap_t* handle) {
             if (func(pkt_data, pkt_hdr->caplen, packet)) {
                 fprintf(stdout, "[ERROR] could not properly parse packet\n");
             }
-            else {
+            else if (packet->disp != NULL) {
                 packet->disp(packet);
             }
         }
 
-        packet->free(packet);
+	if (packet->free != NULL) {
+       	    packet->free(packet);
+	}
         free(packet);
         
         //Delete here
