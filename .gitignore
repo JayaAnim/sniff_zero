@@ -10,3 +10,4 @@ build/compile_commands.json
 build/CTestTestfile.cmake
 build/_deps
 .cached
+.DS_Store
