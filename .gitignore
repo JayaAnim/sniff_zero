@@ -9,5 +9,5 @@ build/install_manifest.txt
 build/compile_commands.json
 build/CTestTestfile.cmake
 build/_deps
-.cached
+.cache
 .DS_Store
