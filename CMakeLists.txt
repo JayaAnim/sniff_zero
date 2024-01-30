@@ -19,17 +19,19 @@ set(SRC_FILES
     ${SRC_DIR}/ieee802_11.c
     ${SRC_DIR}/ipvx.c
     ${SRC_DIR}/ethernet.c
-    ${SRC_DIR}/packet_globals.c
+    ${SRC_DIR}/sniffer_api.c
+    ${SRC_DIR}/sniffer.c
 )
 
 set(INC_FILES
     ${INC_DIR}/packet_parser.h
     ${INC_DIR}/interface_opts.h
     ${INC_DIR}/sniffer_config.h
-    ${INC_DIR}/packet_globals.h
+    ${INC_DIR}/sniffer_api.h
     ${INC_DIR}/ieee802_11.h
     ${INC_DIR}/ipvx.h
     ${INC_DIR}/ethernet.h
+    ${INC_DIR}/sniffer.h
 )
 
 # Add the executable

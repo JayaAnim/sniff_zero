@@ -1,49 +1,26 @@
 #include "packet_parser.h"
-#include "packet_globals.h"
+#include "sniffer.h"
 
 int sniff_pkts_noloop(pcap_t* handle) {
     u_int32_t pkt_cntr = 0;
 
+    int dl = pcap_datalink(handle);
+
     //Initialize header and data structs for retrieving packets
     struct pcap_pkthdr* pkt_hdr;
     const u_char* pkt_data;
-    
-    //Retrieve relevant datalink name and id
-    int dl = pcap_datalink(handle);
-    const char* dl_name = pcap_datalink_val_to_name(dl);
+
+    sniffer_api_t* sniffer_handle = init_sniffer(dl);
 
     //Capture packets
     while (pcap_next_ex(handle, &pkt_hdr, &pkt_data)) {
 
         fprintf(stdout, "packet[%hd]===============================================================\n", pkt_cntr);
-
-        if (parse_pcap_hdr(pkt_hdr)) {
-            fprintf(stdout, "[ERROR] could not parse pcap header\n");
-        }
-        else {
-            disp_pcap_hdr(dl_name);
-        }
-
-        parse_pkt_func func = get_pkt_parser(dl, dl_name);
-        if (func == NULL) {
-            fprintf(stdout, "[ERROR] linktype %s not supported\n", dl_name);
-        }
-        else {
-            if (func(pkt_data, pkt_hdr->caplen)) {
-                fprintf(stdout, "[ERROR] could not properly parse packet\n");
-            }
-            else if (disp_pkt != NULL) {
-                disp_pkt();
-            }
-        }
-
-        if (free_pkt != NULL) {
-                free_pkt();
-        }
-        
+        sniffer_handle->parse_pkt(sniffer_handle, pkt_data, pkt_hdr);
+        sniffer_handle->disp_pkt(sniffer_handle);
 
         pkt_cntr++;
-        if (pkt_cntr % 10 == 0) {
+        if (pkt_cntr % 30 == 0) {
             char answer;
             printf("Do you want to continue capturing more packets? (y/n): ");
             scanf(" %c", &answer);
@@ -52,6 +29,8 @@ int sniff_pkts_noloop(pcap_t* handle) {
             }
         }
     }
+
+    close_sniffer(sniffer_handle, dl);
 
     return 0;
 }
@@ -66,32 +45,3 @@ void disp_dls(pcap_t* pcap_inst) {
 
     pcap_free_datalinks(dls);
 }
-
-void disp_pcap_hdr(const char* dl_name) {
-    fprintf(stdout, "(datalink %s) (captured %u/%u) (time %ld.%06d)\n", dl_name, packet.pcap_hdr.caplen, packet.pcap_hdr.len, packet.pcap_hdr.ts.tv_sec, packet.pcap_hdr.ts.tv_usec);
-}
-
-int parse_pcap_hdr(struct pcap_pkthdr* hdr) {
-    packet.pcap_hdr = *hdr;
-    return 0;
-}
-
-parse_pkt_func get_pkt_parser(int dl_id, const char* dl_name) {
-    parse_pkt_func func = NULL;    
-
-    struct dl_cmd_if cmds[] = {
-        { 1, parse_LINKTYPE_ETHERNET },
-        { 127, parse_IEEE802_11_RADIOTAP },
-        { 229, parse_LINKTYPE_IPV6 },
-        { 228, parse_LINKTYPE_IPV4 },
-    };
-
-    for (int i = 0; i < sizeof(cmds) / sizeof(cmds[0]); ++i) {
-        if (cmds[i].dl_id == dl_id) {
-            func = cmds[i].cmd; 
-        }
-    }
-
-    return func;
-}
-

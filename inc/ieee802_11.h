@@ -5,7 +5,7 @@
 #include <pcap/pcap.h>
 #include <arpa/inet.h>
 #include <string.h>
-#include "packet_globals.h"
+#include "sniffer_api.h"
 
 struct ieee80211_radiotap_header {
     u_int8_t it_version; // Radiotap header version, should always be 0 
@@ -23,17 +23,20 @@ typedef struct ieee80211_radiotap_packet {
     u_int32_t* it_present_list; // List of it_present bitmaps, in order found
 } radiotap_pkt_t;
 
-/*LINKTYPE_IEEE802_11_RADIOTAP 	127 	DLT_IEEE802_11_RADIO 	Radiotap link-layer information followed by an 802.11 header */
-int parse_IEEE802_11_RADIOTAP(const u_char* data, bpf_u_int32 caplen);
+//LINKTYPE_IEEE802_11_RADIOTAP 	127 	DLT_IEEE802_11_RADIO 	Radiotap link-layer information followed by an 802.11 header 
+int _parse_IEEE802_11_RADIOTAP(sniffer_api_t* self, const u_char* data, struct pcap_pkthdr* hdr);
 
-int parse_IEEE802_11_RADIOTAP_hdr(const u_char* data, bpf_u_int32 caplen);
+void _disp_IEEE802_11_RADIOTAP(sniffer_api_t* self);
 
-int parse_IEEE802_11_hdr(const u_char* data, bpf_u_int32 caplen);
+void _reset_IEEE802_11_RADIOTAP(sniffer_api_t* self);
 
-int parse_IEEE802_11_pkt(const u_char* data, bpf_u_int32 caplen);
+int _set_IEEE802_11_RADIOTAP(sniffer_api_t* self);
 
-void disp_IEEE802_11_RADIOTAP();
+/* non-required functions */
+int _parse_IEEE802_11_RADIOTAP_hdr(sniffer_api_t* self, const u_char* data, bpf_u_int32 caplen);
 
-void free_IEEE802_11_RADIOTAP();
+int _parse_IEEE802_11_hdr(sniffer_api_t* self, const u_char* data, bpf_u_int32 caplen);
+
+int _parse_IEEE802_11_pkt(sniffer_api_t* self, const u_char* data, bpf_u_int32 caplen);
 
 #endif

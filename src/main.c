@@ -4,12 +4,10 @@
 #include "packet_parser.h"
 #include "interface_opts.h"
 #include "sniffer_config.h"
-#include "packet_globals.h"
+#include "sniffer.h"
 #include <unistd.h>
 
 int main(int argc, char** argv) {
-
-    init_globals();
 
     char* if_name = retr_if();
     

@@ -5,7 +5,7 @@
 #include <pcap/pcap.h>
 #include <arpa/inet.h>
 #include <string.h>
-#include "packet_globals.h"
+#include "sniffer_api.h"
 
 //Displays interfaces to user and returns name of selection
 char* retr_if();

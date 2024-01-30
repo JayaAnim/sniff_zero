@@ -40,16 +40,17 @@ char* retr_if() {
     u_int16_t if_id = slct_if(num_if);
     fprintf(stdout, "id selected %d", if_id);
 
+    head = interfaces;
     //Retrieve if
     for (int i = 0; i < if_id; ++i) {
-        interfaces = interfaces->next;
-        if (interfaces == NULL) {
+        head = head->next;
+        if (head == NULL) {
             fprintf(stderr, "attempted to access out of bounds interface, check bounds handling\n");
             pcap_freealldevs(interfaces);
             exit(1);
         }
     }
-    char* if_name = strdup(interfaces->name);
+    char* if_name = strdup(head->name);
 
     //Free array of interfaces
     pcap_freealldevs(interfaces);

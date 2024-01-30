@@ -9,6 +9,7 @@ pcap_t* init_handle(char* if_name) {
     if (handle == NULL) {
         fprintf(stdout, "pcap failed to initialize\n");
         fprintf(stdout, "[ERROR]: %s", errbuf);
+        pcap_close(handle);
         exit(1);
     }
 

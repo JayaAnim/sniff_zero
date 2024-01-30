@@ -5,7 +5,7 @@
 #include <pcap/pcap.h>
 #include <arpa/inet.h>
 #include <string.h>
-#include "packet_globals.h"
+#include "sniffer_api.h"
 
 /*
  * Helper functions for main to containerize error checking
